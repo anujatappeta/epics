@@ -6,7 +6,7 @@ from tensorflow.keras.applications import EfficientNetB3, efficientnet
 from PIL import Image
 import os
 import gdown
-from solutions import get_solution
+from solutions import get_solution  # Ensure solutions.py exists and is UTF-8 encoded
 
 # ---------------- CONFIG ----------------
 IMG_SIZE = (300, 300)
@@ -73,14 +73,9 @@ def load_model():
     return model
 
 # ---------------- STATE ----------------
-if "page" not in st.session_state:
-    st.session_state.page = "language"
-if "lang" not in st.session_state:
-    st.session_state.lang = "en"
-if "pred_class" not in st.session_state:
-    st.session_state.pred_class = None
-if "confidence" not in st.session_state:
-    st.session_state.confidence = 0.0
+for key in ["page", "lang", "pred_class", "confidence"]:
+    if key not in st.session_state:
+        st.session_state[key] = "language" if key=="page" else ("en" if key=="lang" else None if key=="pred_class" else 0.0)
 
 # ---------------- STYLE ----------------
 st.markdown("""
@@ -102,7 +97,6 @@ p.subtitle {font-size:1.4rem; color:#ffffff; text-shadow:1px 1px 4px rgba(0,0,0,
 
 # ---------------- PAGE FUNCTIONS ----------------
 def language_page():
-    headers = LOCALIZED_HEADERS[st.session_state.lang]
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>🌍 Choose Your Language</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subtitle'>Select your preferred language to continue.</p>", unsafe_allow_html=True)
@@ -163,8 +157,8 @@ def solution_page():
     else:
         sol = get_solution(st.session_state.pred_class, lang)
         for i in range(3):
-            solution_text = sol.get(f"organic_solution_alt{i}", "") or sol.get("organic_solution", "")
-            ingredients_text = sol.get(f"ingredients_alt{i}", "") or sol.get("ingredients", "")
+            solution_text = sol.get(f"organic_solution_alt{i}", sol.get("organic_solution", ""))
+            ingredients_text = sol.get(f"ingredients_alt{i}", sol.get("ingredients", ""))
             st.markdown(
                 f"<div class='solution-text'>"
                 f"<h3>{headers['solution_header']} {i+1}</h3>"
