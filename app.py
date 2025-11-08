@@ -6,7 +6,7 @@ from tensorflow.keras.applications import EfficientNetB3, efficientnet
 from PIL import Image
 import os
 import gdown
-from solutions import get_solution 
+from solutions import get_solution
 
 # ---------------- CONFIG ----------------
 IMG_SIZE = (300, 300)
@@ -17,61 +17,28 @@ CLASS_NAMES = [
 MODEL_PATH = "best_model_weights.h5"
 DRIVE_FILE_ID = "10R4Z7M95v1lXHu71C8j4Rg7QZUNy1TwV"
 
-# ---------------- LOCALIZED TEXT MAPPING ----------------
+# ---------------- LOCALIZED TEXT ----------------
 LOCALIZED_HEADERS = {
-    "en": {
-        "upload_title": "Mango Leaf Detector",
-        "upload_subtitle": "Upload or capture a mango leaf image below",
-        "upload_file": "📂 Upload Image",
-        "capture_camera": "📸 Capture using Camera",
-        "info_upload": "Please upload or capture a leaf image to continue.",
-        "solution_title": "Organic Solution",
-        "solution_button": "🌱 Show Organic Solution",
-        "solution_header": "Solution:",
-        "ingredients_header": "Ingredients / How to Apply:",
-        "back_language": "↩ Back to Language",
-        "back_upload": "↩ Back to Upload",
-        "try_again": "🔁 Try Another Image",
-        "analyzing": "🧠 Analyzing leaf...",
-        "success": "✅ Prediction:"
-    },
-    "hi": {
-        "upload_title": "आम के पत्ते की पहचान",
-        "upload_subtitle": "आम के पत्ते की इमेज अपलोड करें या कैप्चर करें",
-        "upload_file": "📂 इमेज अपलोड करें",
-        "capture_camera": "📸 कैमरा उपयोग करें",
-        "info_upload": "आगे बढ़ने के लिए कृपया पत्ते की इमेज अपलोड करें या कैप्चर करें।",
-        "solution_title": "जैविक उपाय",
-        "solution_button": "🌱 जैविक उपाय देखें",
-        "solution_header": "उपाय:",
-        "ingredients_header": "सामग्री / आवेदन कैसे करें:",
-        "back_language": "↩ भाषा चुनें",
-        "back_upload": "↩ पिछली इमेज पर",
-        "try_again": "🔁 नई इमेज के लिए",
-        "analyzing": "🧠 पत्ते का विश्लेषण हो रहा है...",
-        "success": "✅ पहचान:"
-    },
-    "te": {
-        "upload_title": "మామిడి ఆకు డిటెక్టర్",
-        "upload_subtitle": "మామిడి ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి లేదా క్యాప్చర్ చేయండి",
-        "upload_file": "📂 చిత్రాన్ని అప్‌లోడ్ చేయండి",
-        "capture_camera": "📸 కెమెరా ఉపయోగించండి",
-        "info_upload": "కొనసాగడానికి దయచేసి ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి లేదా క్యాప్చర్ చేయండి.",
-        "solution_title": "సేంద్రీయ పరిష్కారం",
-        "solution_button": "🌱 సేంద్రీయ పరిష్కారం చూపించు",
-        "solution_header": "పరిష్కారం:",
-        "ingredients_header": "కావలసినవి / ఎలా దరఖాస్తు చేయాలి:",
-        "back_language": "↩ భాషకు తిరిగి",
-        "back_upload": "↩ అప్‌లోడ్‌కు తిరిగి",
-        "try_again": "🔁 మరొక ఇమేజ్ ప్రయత్నించండి",
-        "analyzing": "🧠 ఆకు విశ్లేషిస్తోంది...",
-        "success": "✅ అంచనా:"
-    }
+    "en": {"upload_title":"Mango Leaf Detector","upload_subtitle":"Upload or capture a mango leaf image below",
+           "upload_file":"📂 Upload Image","capture_camera":"📸 Capture using Camera","info_upload":"Please upload or capture a leaf image to continue.",
+           "solution_title":"Organic Solution","solution_button":"🌱 Show Organic Solution","solution_header":"Solution:",
+           "ingredients_header":"Ingredients / How to Apply:","back_language":"↩ Back to Language","back_upload":"↩ Back to Upload",
+           "try_again":"🔁 Try Another Image","analyzing":"🧠 Analyzing leaf...","success":"✅ Prediction:"},
+    "hi": {"upload_title":"आम के पत्ते की पहचान","upload_subtitle":"आम के पत्ते की इमेज अपलोड करें या कैप्चर करें",
+           "upload_file":"📂 इमेज अपलोड करें","capture_camera":"📸 कैमरा उपयोग करें","info_upload":"आगे बढ़ने के लिए कृपया पत्ते की इमेज अपलोड करें या कैप्चर करें।",
+           "solution_title":"जैविक उपाय","solution_button":"🌱 जैविक उपाय देखें","solution_header":"उपाय:",
+           "ingredients_header":"सामग्री / आवेदन कैसे करें:","back_language":"↩ भाषा चुनें","back_upload":"↩ पिछली इमेज पर",
+           "try_again":"🔁 नई इमेज के लिए","analyzing":"🧠 पत्ते का विश्लेषण हो रहा है...","success":"✅ पहचान:"},
+    "te": {"upload_title":"మామిడి ఆకు డిటెక్టర్","upload_subtitle":"మామిడి ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి లేదా క్యాప్చర్ చేయండి",
+           "upload_file":"📂 చిత్రాన్ని అప్‌లోడ్ చేయండి","capture_camera":"📸 కెమెరా ఉపయోగించండి","info_upload":"కొనసాగడానికి దయచేసి ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి లేదా క్యాప్చర్ చేయండి.",
+           "solution_title":"సేంద్రీయ పరిష్కారం","solution_button":"🌱 సేంద్రీయ పరిష్కారం చూపించు","solution_header":"పరిష్కారం:",
+           "ingredients_header":"కావలసినవి / ఎలా దరఖాస్తు చేయాలి:","back_language":"↩ భాషకు తిరిగి","back_upload":"↩ అప్‌లోడ్‌కు తిరిగి",
+           "try_again":"🔁 మరొక ఇమేజ్ ప్రయత్నించండి","analyzing":"🧠 ఆకు విశ్లేషిస్తోంది...","success":"✅ అంచనా:"}
 }
 
 st.set_page_config(page_title="🌿 Mango Doctor", page_icon="🍃", layout="centered")
 
-# ---------------- MODEL FUNCTIONS ----------------
+# ---------------- MODEL ----------------
 @st.cache_resource
 def download_model():
     if not os.path.exists(MODEL_PATH):
@@ -83,11 +50,8 @@ def download_model():
 def load_model():
     download_model()
     data_augmentation = tf.keras.Sequential([
-        layers.RandomFlip("horizontal"),
-        layers.RandomRotation(0.06),
-        layers.RandomZoom(0.06),
-        layers.RandomTranslation(0.03, 0.03),
-        layers.RandomContrast(0.06),
+        layers.RandomFlip("horizontal"), layers.RandomRotation(0.06),
+        layers.RandomZoom(0.06), layers.RandomTranslation(0.03,0.03), layers.RandomContrast(0.06)
     ])
     inputs = layers.Input(shape=IMG_SIZE + (3,))
     x = data_augmentation(inputs)
@@ -106,65 +70,53 @@ def load_model():
     return model
 
 # ---------------- STATE ----------------
-if "page" not in st.session_state:
-    st.session_state.page = "language"
+if "page" not in st.session_state: st.session_state.page = "language"
 
 # ---------------- STYLE ----------------
-st.markdown("""<style>
+st.markdown("""
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
-[data-testid="stAppViewContainer"] { background: linear-gradient(145deg, #a8df8e 0%, #68b368 50%, #4a8d4a 100%); font-family: 'Poppins', sans-serif; color: #1a4301; }
-[data-testid="stMain"] { background-color: transparent; }
-.main-container { text-align: center; margin: 8vh auto 0; max-width: 700px; padding: 2rem; animation: fadeIn 1.2s ease-in-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-h1.title { font-size: 3.8rem; font-weight: 800; color: #ffffff; text-shadow: 2px 2px 10px rgba(0,0,0,0.4); margin-bottom: 0.5rem; }
-p.subtitle { font-size: 1.4rem; color: #ffffff; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); margin-bottom: 3rem; font-weight: 500; }
-.language-button-container { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
-.language-selection-button > button { background-color: rgba(255,255,255,0.2)!important; backdrop-filter: blur(10px)!important; -webkit-backdrop-filter: blur(10px)!important; color: white!important; border: 1px solid rgba(255,255,255,0.4)!important; border-radius: 20px!important; padding: 1.5rem 1.5rem!important; transition: all 0.3s cubic-bezier(.25,.8,.25,1)!important; box-shadow:0 4px 15px rgba(0,0,0,0.3), inset 0 0 0 0 rgba(255,255,255,0.6)!important; width:170px!important; height:110px!important; font-size:1.6rem!important; font-weight:700!important; }
-.language-selection-button > button:hover { transform: translateY(-8px) scale(1.05)!important; box-shadow:0 15px 30px rgba(0,0,0,0.4), inset 0 0 15px 5px rgba(255,255,255,0.4)!important; background-color: rgba(255,255,255,0.3)!important; }
-.stButton>button { background: linear-gradient(90deg, #3c9a40, #7bc950); color: white!important; border: none!important; border-radius: 14px!important; padding: 0.9rem 2.5rem!important; font-weight:700!important; font-size:1.1rem!important; box-shadow:0px 4px 15px rgba(0,0,0,0.3); transition: all 0.4s ease; }
-.stButton>button:hover { transform: scale(1.07); background: linear-gradient(90deg, #4aa84a, #85e085); box-shadow: 0px 8px 20px rgba(0,0,0,0.4); }
-img { border-radius: 18px; margin-top: 15px; box-shadow:0px 5px 15px rgba(0,0,0,0.2); }
-.confidence { font-weight:700; color:#1a4301; margin-top:1.5rem; font-size:1.3rem; }
-.solution-text { text-align:left; color:#1a4301; background-color: rgba(255,255,255,0.95); padding:25px; border-radius:18px; margin-top:25px; box-shadow:0 5px 15px rgba(0,0,0,0.15); }
-.solution-text h3 { color:#2e7d32; margin-top:0; font-weight:700; }
-@media (max-width:768px){ h1.title{ font-size:2.5rem;} p.subtitle{ font-size:1.1rem;} .main-container{margin-top:5vh;} .language-selection-button>button{width:100px!important;height:70px!important;font-size:1.2rem!important;} }
-</style>""", unsafe_allow_html=True)
+[data-testid="stAppViewContainer"] {background: linear-gradient(145deg,#a8df8e 0%,#68b368 50%,#4a8d4a 100%); font-family:'Poppins',sans-serif; color:#1a4301;}
+[data-testid="stMain"] {background-color:transparent;}
+.main-container {text-align:center; margin:8vh auto 0; max-width:700px; padding:2rem; animation: fadeIn 1.2s ease-in-out;}
+@keyframes fadeIn {from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);}}
+h1.title {font-size:3.8rem; font-weight:800; color:#ffffff; text-shadow:2px 2px 10px rgba(0,0,0,0.4); margin-bottom:0.5rem;}
+p.subtitle {font-size:1.4rem; color:#ffffff; text-shadow:1px 1px 4px rgba(0,0,0,0.3); margin-bottom:3rem; font-weight:500;}
+.stButton>button {background:linear-gradient(90deg,#3c9a40,#7bc950); color:white!important; border:none!important; border-radius:14px!important; padding:0.9rem 2.5rem!important; font-weight:700!important; font-size:1.1rem!important;}
+.confidence {font-weight:800; color:#1a4301; margin-top:1.5rem; font-size:2rem;}
+.solution-text {text-align:left; color:#1a4301; background-color: rgba(255,255,255,0.95); padding:25px; border-radius:18px; margin-top:25px;}
+.solution-text h3 {color:#2e7d32; margin-top:0; font-weight:700;}
+</style>
+""", unsafe_allow_html=True)
 
 # ---------------- PAGE LOGIC ----------------
 if st.session_state.page == "language":
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>🌍 Choose Your Language</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subtitle'>Select your preferred language to continue.</p>", unsafe_allow_html=True)
-    st.markdown("<div class='language-button-container'>", unsafe_allow_html=True)
-    col1, col2, col3 = st.columns(3)
-    def generate_lang_button(col, name, code):
+    col1,col2,col3 = st.columns(3)
+    for col,name,code in zip([col1,col2,col3],["English","हिन्दी","తెలుగు"],["en","hi","te"]):
         with col:
-            st.markdown("<div class='language-selection-button'>", unsafe_allow_html=True)
             if st.button(name, key=f"lang_{code}", use_container_width=True):
                 st.session_state.lang = code
                 st.session_state.page = "upload"
                 st.rerun()
-            st.markdown("</div>", unsafe_allow_html=True)
-    generate_lang_button(col1, "English", "en")
-    generate_lang_button(col2, "हिन्दी", "hi")
-    generate_lang_button(col3, "తెలుగు", "te")
-    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 elif st.session_state.page == "upload":
-    lang = st.session_state.get("lang", "en")
+    lang = st.session_state.get("lang","en")
     headers = LOCALIZED_HEADERS.get(lang)
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown(f"<h1 class='title'>🍃 {headers['upload_title']}</h1>", unsafe_allow_html=True)
     st.markdown(f"<p class='subtitle'>{headers['upload_subtitle']}</p>", unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
+    col1,col2 = st.columns(2)
     with col1: uploaded_file = st.file_uploader(headers['upload_file'], type=["jpg","png","jpeg"], label_visibility="collapsed")
     with col2: capture_image = st.camera_input(headers['capture_camera'], label_visibility="collapsed")
     image_source = uploaded_file or capture_image
     if image_source:
         image = Image.open(image_source).convert("RGB")
         st.image(image, use_container_width=True)
-        img = image.resize(IMG_SIZE)
-        img_array = np.expand_dims(np.array(img), axis=0)
+        img_array = np.expand_dims(np.array(image.resize(IMG_SIZE)), axis=0)
         img_array = efficientnet.preprocess_input(img_array)
         with st.spinner(headers['analyzing']):
             model = load_model()
@@ -174,15 +126,9 @@ elif st.session_state.page == "upload":
             confidence = preds[pred_idx]*100
         st.session_state.pred_class = pred_class
         st.session_state.confidence = confidence
-        
-        # ---- UPDATED: Large Bold Prediction ----
-        st.markdown(
-            f"<div class='confidence'><span style='font-size:2.2rem; font-weight:800; color:#1a4301;'>{headers['success']} {pred_class}</span> "
-            f"<span style='font-size:1.2rem;'>(Confidence: {confidence:.2f}%)</span></div>", 
-            unsafe_allow_html=True
-        )
+        st.markdown(f"<div class='confidence'>{headers['success']} {pred_class} ({confidence:.2f}%)</div>", unsafe_allow_html=True)
 
-        col_back, col_sol = st.columns([1,2])
+        col_back,col_sol = st.columns([1,2])
         with col_back:
             if st.button(headers['back_language'], use_container_width=True):
                 st.session_state.page="language"; st.rerun()
@@ -199,20 +145,26 @@ elif st.session_state.page == "solution":
     lang = st.session_state.get("lang","en")
     headers = LOCALIZED_HEADERS.get(lang)
     st.markdown(f"<h1 class='title'>🌱 {headers['solution_title']}</h1>", unsafe_allow_html=True)
+    
     if "pred_class" not in st.session_state:
         st.warning("⚠ Upload an image first.")
     else:
-        disease = st.session_state.pred_class
-        sol = get_solution(disease, lang)
-        # Show all 3 solutions
-        for i in range(1,4):
+        sol = get_solution(st.session_state.pred_class, lang)
+        for i in range(3):
+            solution_text = sol.get(f"organic_solution_alt{i}", "")
+            ingredients_text = sol.get(f"ingredients_alt{i}", "")
+            if not solution_text: solution_text = sol.get("organic_solution", "")
+            if not ingredients_text: ingredients_text = sol.get("ingredients", "")
             st.markdown(
-                f"<div class='solution-text'><h3>{headers['solution_header']} {i}</h3>"
-                f"<p>{sol.get(f'organic_solution_alt{i-1}', sol.get('organic_solution',''))}</p>"
+                f"<div class='solution-text'>"
+                f"<h3>{headers['solution_header']} {i+1}</h3>"
+                f"<p>{solution_text}</p>"
                 f"<h3>{headers['ingredients_header']}</h3>"
-                f"<p>{sol.get(f'ingredients_alt{i-1}', sol.get('ingredients',''))}</p></div>", 
+                f"<p>{ingredients_text}</p>"
+                f"</div>",
                 unsafe_allow_html=True
             )
+
     col1,col2 = st.columns(2)
     with col1:
         if st.button(headers['back_upload'], use_container_width=True):
