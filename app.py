@@ -73,7 +73,14 @@ def load_model():
     return model
 
 # ---------------- STATE ----------------
-if "page" not in st.session_state: st.session_state.page = "language"
+if "page" not in st.session_state:
+    st.session_state.page = "language"
+if "lang" not in st.session_state:
+    st.session_state.lang = "en"
+if "pred_class" not in st.session_state:
+    st.session_state.pred_class = None
+if "confidence" not in st.session_state:
+    st.session_state.confidence = 0.0
 
 # ---------------- STYLE ----------------
 st.markdown("""
@@ -85,15 +92,17 @@ st.markdown("""
 @keyframes fadeIn {from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);}}
 h1.title {font-size:3.8rem; font-weight:800; color:#ffffff; text-shadow:2px 2px 10px rgba(0,0,0,0.4); margin-bottom:0.5rem;}
 p.subtitle {font-size:1.4rem; color:#ffffff; text-shadow:1px 1px 4px rgba(0,0,0,0.3); margin-bottom:3rem; font-weight:500;}
-.stButton>button {background:linear-gradient(90deg,#3c9a40,#7bc950); color:white!important; border:none!important; border-radius:14px!important; padding:0.9rem 2.5rem!important; font-weight:700!important; font-size:1.1rem!important;}
+.stButton>button {background:linear-gradient(90deg,#3c9a40,#7bc950); color:white!important; border:none!important; border-radius:14px!important; padding:0.9rem 2.5rem!important; font-weight:700!important; font-size:1.1rem!important; transition: transform 0.2s ease;}
+.stButton>button:hover {transform: scale(1.05);}
 .confidence {font-weight:800; color:#1a4301; margin-top:1.5rem; font-size:2rem;}
 .solution-text {text-align:left; color:#1a4301; background-color: rgba(255,255,255,0.95); padding:25px; border-radius:18px; margin-top:25px;}
 .solution-text h3 {color:#2e7d32; margin-top:0; font-weight:700;}
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- PAGE LOGIC ----------------
+# ---------------- PAGE FUNCTIONS ----------------
 def language_page():
+    headers = LOCALIZED_HEADERS[st.session_state.lang]
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>🌍 Choose Your Language</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subtitle'>Select your preferred language to continue.</p>", unsafe_allow_html=True)
@@ -103,19 +112,20 @@ def language_page():
             if st.button(name, key=f"lang_{code}", use_container_width=True):
                 st.session_state.lang = code
                 st.session_state.page = "upload"
-                st.experimental_rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
 def upload_page():
-    lang = st.session_state.get("lang","en")
-    headers = LOCALIZED_HEADERS.get(lang)
+    lang = st.session_state.lang
+    headers = LOCALIZED_HEADERS[lang]
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown(f"<h1 class='title'>🍃 {headers['upload_title']}</h1>", unsafe_allow_html=True)
     st.markdown(f"<p class='subtitle'>{headers['upload_subtitle']}</p>", unsafe_allow_html=True)
+
     col1, col2 = st.columns(2)
     with col1: uploaded_file = st.file_uploader(headers['upload_file'], type=["jpg","png","jpeg"], label_visibility="collapsed")
     with col2: capture_image = st.camera_input(headers['capture_camera'], label_visibility="collapsed")
     image_source = uploaded_file or capture_image
+
     if image_source:
         image = Image.open(image_source).convert("RGB")
         st.image(image, use_container_width=True)
@@ -125,59 +135,58 @@ def upload_page():
             model = load_model()
             preds = model.predict(img_array)[0]
             pred_idx = np.argmax(preds)
-            pred_class = CLASS_NAMES[pred_idx]
-            confidence = preds[pred_idx]*100
-        st.session_state.pred_class = pred_class
-        st.session_state.confidence = confidence
-        st.markdown(f"<div class='confidence'>{headers['success']} {pred_class} ({confidence:.2f}%)</div>", unsafe_allow_html=True)
+            st.session_state.pred_class = CLASS_NAMES[pred_idx]
+            st.session_state.confidence = preds[pred_idx]*100
+
+        st.markdown(f"<div class='confidence'>{headers['success']} {st.session_state.pred_class} ({st.session_state.confidence:.2f}%)</div>", unsafe_allow_html=True)
 
         col_back, col_sol = st.columns([1,2])
         with col_back:
             if st.button(headers['back_language'], use_container_width=True):
-                st.session_state.page="language"; st.experimental_rerun()
+                st.session_state.page = "language"
         with col_sol:
             if st.button(headers['solution_button'], use_container_width=True):
-                st.session_state.page="solution"; st.experimental_rerun()
+                st.session_state.page = "solution"
     else:
         st.info(headers['info_upload'])
-        if st.button(headers['back_language']): st.session_state.page="language"; st.experimental_rerun()
+        if st.button(headers['back_language']): st.session_state.page = "language"
     st.markdown("</div>", unsafe_allow_html=True)
 
 def solution_page():
+    lang = st.session_state.lang
+    headers = LOCALIZED_HEADERS[lang]
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
-    lang = st.session_state.get("lang","en")
-    headers = LOCALIZED_HEADERS.get(lang)
     st.markdown(f"<h1 class='title'>🌱 {headers['solution_title']}</h1>", unsafe_allow_html=True)
-    
-    if "pred_class" not in st.session_state:
+
+    if not st.session_state.pred_class:
         st.warning("⚠ Upload an image first.")
     else:
         sol = get_solution(st.session_state.pred_class, lang)
         for i in range(3):
-            solution_text = sol.get(f"organic_solution_alt{i}", "")
-            ingredients_text = sol.get(f"ingredients_alt{i}", "")
-            if not solution_text: solution_text = sol.get("organic_solution", "")
-            if not ingredients_text: ingredients_text = sol.get("ingredients", "")
+            solution_text = sol.get(f"organic_solution_alt{i}", "") or sol.get("organic_solution", "")
+            ingredients_text = sol.get(f"ingredients_alt{i}", "") or sol.get("ingredients", "")
             st.markdown(
                 f"<div class='solution-text'>"
                 f"<h3>{headers['solution_header']} {i+1}</h3>"
                 f"<p>{solution_text}</p>"
                 f"<h3>{headers['ingredients_header']}</h3>"
                 f"<p>{ingredients_text}</p>"
-                f"</div>",
-                unsafe_allow_html=True
+                f"</div>", unsafe_allow_html=True
             )
 
-    col1,col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         if st.button(headers['back_upload'], use_container_width=True):
-            st.session_state.page="upload"; st.experimental_rerun()
+            st.session_state.page = "upload"
     with col2:
         if st.button(headers['try_again'], use_container_width=True):
-            st.session_state.page="upload"; st.experimental_rerun()
+            st.session_state.page = "upload"
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------------- MAIN ----------------
-if st.session_state.page == "language": language_page()
-elif st.session_state.page == "upload": upload_page()
-elif st.session_state.page == "solution": solution_page()
+if st.session_state.page == "language":
+    language_page()
+elif st.session_state.page == "upload":
+    upload_page()
+elif st.session_state.page == "solution":
+    solution_page()
