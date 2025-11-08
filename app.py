@@ -2,11 +2,11 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras import layers, models
-from tensorflow.keras.applications import EfficientNetB3
+from tensorflow.keras.applications import EfficientNetB3, efficientnet
 from PIL import Image
 import os
 import gdown
-from solutions import get_solution
+from solutions import get_solution  # keep your solutions.py
 
 # ---------------- CONFIG ----------------
 IMG_SIZE = (300, 300)
@@ -19,7 +19,7 @@ DRIVE_FILE_ID = "10R4Z7M95v1lXHu71C8j4Rg7QZUNy1TwV"
 
 st.set_page_config(page_title="🌿 Mango Doctor", page_icon="🍃", layout="wide")
 
-# ---------------- DOWNLOAD MODEL IF MISSING ----------------
+# ---------------- DOWNLOAD MODEL ----------------
 @st.cache_resource
 def download_model():
     if not os.path.exists(MODEL_PATH):
@@ -42,9 +42,9 @@ def load_model():
 
     inputs = layers.Input(shape=IMG_SIZE + (3,))
     x = data_augmentation(inputs)
-    x = layers.Lambda(lambda t: tf.keras.applications.efficientnet.preprocess_input(t))(x)
+    x = layers.Lambda(lambda t: efficientnet.preprocess_input(t))(x)
 
-    base_model = EfficientNetB3(include_top=False, weights=None, input_tensor=x)
+    base_model = EfficientNetB3(include_top=False, weights='imagenet', input_tensor=x)
     base_model.trainable = False
 
     x = layers.GlobalAveragePooling2D()(base_model.output)
@@ -68,59 +68,91 @@ if "page" not in st.session_state:
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-    html, body, [class*="css"] {
+
+    .stApp {
+        background: linear-gradient(135deg, #2e7d32 0%, #c5e384 50%, #fff3b0 100%);
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(160deg, #e8f5e9 0%, #e3f2fd 100%);
+        color: #1b4332;
+        overflow: hidden;
     }
+
+    /* 🌿 Fullscreen Center */
     .main-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 90vh;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         text-align: center;
-        padding: 1rem;
+        animation: fadeIn 1.2s ease-in-out;
+        width: 100%;
     }
-    .title {
-        font-size: 2.5rem;
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translate(-50%, -45%); }
+        to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    h1.title {
+        font-size: 3rem;
         font-weight: 700;
-        color: #2e7d32;
-        margin-bottom: 0.5rem;
+        color: #1a4301;
+        text-shadow: 1px 1px 6px rgba(255,255,255,0.3);
+        margin-bottom: 1rem;
     }
-    .subtitle {
-        font-size: 1rem;
-        color: #444;
-        margin-bottom: 2rem;
+
+    p.subtitle {
+        font-size: 1.2rem;
+        color: #2e4600;
+        margin-bottom: 1.5rem;
     }
-    .card {
-        background: white;
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-        max-width: 500px;
-        width: 95%;
-        margin: auto;
+
+    /* 🌿 Radio Buttons */
+    div[data-testid="stRadio"] label {
+        font-size: 1.2rem !important;
+        margin-right: 1rem;
+        color: #2b580c !important;
     }
+
+    /* 🌿 Animated Button */
     .stButton>button {
-        background-color: #2e7d32 !important;
+        background: linear-gradient(90deg, #3c9a40, #7bc950);
         color: white !important;
         border: none !important;
-        border-radius: 10px !important;
-        padding: 0.6rem 1.5rem !important;
+        border-radius: 14px !important;
+        padding: 0.9rem 2.5rem !important;
         font-weight: 600 !important;
-        transition: all 0.2s ease-in-out;
+        font-size: 1.1rem !important;
+        box-shadow: 0px 4px 15px rgba(60,154,64,0.4);
+        transition: all 0.4s ease;
+        animation: glow 2.5s infinite alternate;
     }
+
+    @keyframes glow {
+        from { box-shadow: 0px 0px 10px rgba(124,252,0,0.4); }
+        to { box-shadow: 0px 0px 20px rgba(173,255,47,0.7); }
+    }
+
     .stButton>button:hover {
-        transform: scale(1.05);
-        background-color: #43a047 !important;
+        transform: scale(1.07);
+        background: linear-gradient(90deg, #52b788, #d4d700);
     }
+
     img {
-        border-radius: 12px;
+        border-radius: 15px;
         margin-top: 10px;
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
     }
+
+    .confidence {
+        font-weight: 600;
+        color: #1a4301;
+        margin-top: 1rem;
+        font-size: 1.1rem;
+    }
+
     @media (max-width: 768px) {
-        .title { font-size: 2rem; }
-        .card { padding: 1.5rem; width: 90%; }
+        h1.title { font-size: 2.2rem; }
+        p.subtitle { font-size: 1rem; }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -128,9 +160,9 @@ st.markdown("""
 
 # ---------------- PAGE: LANGUAGE ----------------
 if st.session_state.page == "language":
-    st.markdown("<div class='main-container'><div class='card'>", unsafe_allow_html=True)
+    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>🌍 Choose Your Language</h1>", unsafe_allow_html=True)
-    lang = st.radio("", ["English", "हिन्दी", "తెలుగు"], horizontal=True)
+    lang = st.radio("", ["English", "हिन्दी", "తెలుగు"], horizontal=True, label_visibility="collapsed")
 
     if lang == "English":
         st.session_state.lang = "en"
@@ -139,19 +171,20 @@ if st.session_state.page == "language":
     else:
         st.session_state.lang = "te"
 
-    if st.button("➡️ Continue"):
+    if st.button("➡ Continue"):
         st.session_state.page = "upload"
         st.rerun()
-    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
+
 
 # ---------------- PAGE: UPLOAD ----------------
 elif st.session_state.page == "upload":
-    st.markdown("<div class='main-container'><div class='card'>", unsafe_allow_html=True)
+    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>🍃 Mango Leaf Detector</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subtitle'>Upload or capture a mango leaf image below</p>", unsafe_allow_html=True)
 
-    uploaded_file = st.file_uploader("📸 Upload Image", type=["jpg", "jpeg", "png"])
-    capture_image = st.camera_input("Or capture using camera")
+    uploaded_file = st.file_uploader("📂 Upload Image", type=["jpg", "jpeg", "png"])
+    capture_image = st.camera_input("📸 Capture using Camera")
 
     image_source = uploaded_file or capture_image
 
@@ -161,9 +194,9 @@ elif st.session_state.page == "upload":
 
         img = image.resize(IMG_SIZE)
         img_array = np.expand_dims(np.array(img), axis=0)
-        img_array = tf.keras.applications.efficientnet.preprocess_input(img_array)
+        img_array = efficientnet.preprocess_input(img_array)
 
-        with st.spinner("🧠 Analyzing..."):
+        with st.spinner("🧠 Analyzing leaf..."):
             model = load_model()
             preds = model.predict(img_array)[0]
             pred_idx = np.argmax(preds)
@@ -172,7 +205,7 @@ elif st.session_state.page == "upload":
 
         st.session_state.pred_class = pred_class
         st.session_state.confidence = confidence
-        st.success(f"✅ **{pred_class}** ({confidence:.2f}% confidence)")
+        st.markdown(f"<div class='confidence'>✅ *{pred_class}* ({confidence:.2f}% confidence)</div>", unsafe_allow_html=True)
 
         if st.button("💊 Show Organic Solution"):
             st.session_state.page = "solution"
@@ -180,23 +213,24 @@ elif st.session_state.page == "upload":
     else:
         st.info("Please upload or capture a leaf image to continue.")
 
-    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
+
 
 # ---------------- PAGE: SOLUTION ----------------
 elif st.session_state.page == "solution":
-    st.markdown("<div class='main-container'><div class='card'>", unsafe_allow_html=True)
+    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>💊 Organic Solution</h1>", unsafe_allow_html=True)
 
     if "pred_class" not in st.session_state:
-        st.warning("⚠️ Upload an image first.")
+        st.warning("⚠ Upload an image first.")
     else:
         disease = st.session_state.pred_class
         lang = st.session_state.get("lang", "en")
         sol = get_solution(disease, lang)
         st.markdown(f"### 🌱 {sol['name']}")
-        st.markdown(f"<div style='text-align:left;'>{sol['description']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='text-align:left;color:#1a4301;'>{sol['description']}</div>", unsafe_allow_html=True)
 
     if st.button("🔁 Try Another Image"):
         st.session_state.page = "upload"
         st.rerun()
-    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
