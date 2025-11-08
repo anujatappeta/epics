@@ -50,8 +50,11 @@ def download_model():
 def load_model():
     download_model()
     data_augmentation = tf.keras.Sequential([
-        layers.RandomFlip("horizontal"), layers.RandomRotation(0.06),
-        layers.RandomZoom(0.06), layers.RandomTranslation(0.03,0.03), layers.RandomContrast(0.06)
+        layers.RandomFlip("horizontal"),
+        layers.RandomRotation(0.06),
+        layers.RandomZoom(0.06),
+        layers.RandomTranslation(0.03,0.03),
+        layers.RandomContrast(0.06)
     ])
     inputs = layers.Input(shape=IMG_SIZE + (3,))
     x = data_augmentation(inputs)
@@ -90,26 +93,26 @@ p.subtitle {font-size:1.4rem; color:#ffffff; text-shadow:1px 1px 4px rgba(0,0,0,
 """, unsafe_allow_html=True)
 
 # ---------------- PAGE LOGIC ----------------
-if st.session_state.page == "language":
+def language_page():
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown("<h1 class='title'>🌍 Choose Your Language</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subtitle'>Select your preferred language to continue.</p>", unsafe_allow_html=True)
-    col1,col2,col3 = st.columns(3)
-    for col,name,code in zip([col1,col2,col3],["English","हिन्दी","తెలుగు"],["en","hi","te"]):
+    col1, col2, col3 = st.columns(3)
+    for col, name, code in zip([col1, col2, col3], ["English","हिन्दी","తెలుగు"], ["en","hi","te"]):
         with col:
             if st.button(name, key=f"lang_{code}", use_container_width=True):
                 st.session_state.lang = code
                 st.session_state.page = "upload"
-                st.rerun()
+                st.experimental_rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
-elif st.session_state.page == "upload":
+def upload_page():
     lang = st.session_state.get("lang","en")
     headers = LOCALIZED_HEADERS.get(lang)
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.markdown(f"<h1 class='title'>🍃 {headers['upload_title']}</h1>", unsafe_allow_html=True)
     st.markdown(f"<p class='subtitle'>{headers['upload_subtitle']}</p>", unsafe_allow_html=True)
-    col1,col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     with col1: uploaded_file = st.file_uploader(headers['upload_file'], type=["jpg","png","jpeg"], label_visibility="collapsed")
     with col2: capture_image = st.camera_input(headers['capture_camera'], label_visibility="collapsed")
     image_source = uploaded_file or capture_image
@@ -128,19 +131,19 @@ elif st.session_state.page == "upload":
         st.session_state.confidence = confidence
         st.markdown(f"<div class='confidence'>{headers['success']} {pred_class} ({confidence:.2f}%)</div>", unsafe_allow_html=True)
 
-        col_back,col_sol = st.columns([1,2])
+        col_back, col_sol = st.columns([1,2])
         with col_back:
             if st.button(headers['back_language'], use_container_width=True):
-                st.session_state.page="language"; st.rerun()
+                st.session_state.page="language"; st.experimental_rerun()
         with col_sol:
             if st.button(headers['solution_button'], use_container_width=True):
-                st.session_state.page="solution"; st.rerun()
+                st.session_state.page="solution"; st.experimental_rerun()
     else:
         st.info(headers['info_upload'])
-        if st.button(headers['back_language']): st.session_state.page="language"; st.rerun()
+        if st.button(headers['back_language']): st.session_state.page="language"; st.experimental_rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
-elif st.session_state.page == "solution":
+def solution_page():
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     lang = st.session_state.get("lang","en")
     headers = LOCALIZED_HEADERS.get(lang)
@@ -168,8 +171,13 @@ elif st.session_state.page == "solution":
     col1,col2 = st.columns(2)
     with col1:
         if st.button(headers['back_upload'], use_container_width=True):
-            st.session_state.page="upload"; st.rerun()
+            st.session_state.page="upload"; st.experimental_rerun()
     with col2:
         if st.button(headers['try_again'], use_container_width=True):
-            st.session_state.page="upload"; st.rerun()
+            st.session_state.page="upload"; st.experimental_rerun()
     st.markdown("</div>", unsafe_allow_html=True)
+
+# ---------------- MAIN ----------------
+if st.session_state.page == "language": language_page()
+elif st.session_state.page == "upload": upload_page()
+elif st.session_state.page == "solution": solution_page()
