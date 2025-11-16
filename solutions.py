@@ -3,269 +3,268 @@
 SOLUTIONS = {
     "Anthracnose": {
         "en": {
-            "organic_solution": "Spray neem oil early in the morning to prevent Anthracnose.",
-            "ingredients": "Neem oil 10ml + Water 1L",
-            "organic_solution_alt0": "Apply weekly",
-            "ingredients_alt0": "Neem oil mixture",
-            "organic_solution_alt1": "Remove infected leaves",
-            "ingredients_alt1": "Dispose safely",
-            "organic_solution_alt2": "Maintain proper spacing",
-            "ingredients_alt2": "Ensure sunlight and airflow"
+            "organic_solution": (
+                "Prune and burn dead twigs and infected leaves. "
+                "Spray Pseudomonas fluorescens or neem-based solution weekly. "
+                "Maintain open canopy for airflow and good nutrition. "
+                "Ensure regular monitoring to remove new infections. "
+                "Avoid waterlogging on leaves to prevent fungus."
+            ),
+            "ingredients": "Neem oil 10ml + Water 1L or Pseudomonas fluorescens solution",
         },
         "hi": {
-            "organic_solution": "एंथ्राक्नोज़ से बचने के लिए सुबह में निम तेल छिड़कें।",
-            "ingredients": "निम तेल 10ml + पानी 1L",
-            "organic_solution_alt0": "साप्ताहिक आवेदन करें",
-            "ingredients_alt0": "निम तेल मिश्रण",
-            "organic_solution_alt1": "संक्रमित पत्तियाँ हटाएँ",
-            "ingredients_alt1": "सुरक्षित रूप से नष्ट करें",
-            "organic_solution_alt2": "सही दूरी बनाएँ",
-            "ingredients_alt2": "धूप और हवा सुनिश्चित करें"
+            "organic_solution": (
+                "मृत शाखाओं और संक्रमित पत्तों को काटें और जला दें। "
+                "हर सप्ताह Pseudomonas fluorescens या निम घोल छिड़कें। "
+                "पेड़ की खुली छत्र बनाए रखें और पोषण सुनिश्चित करें। "
+                "नए संक्रमण को हटाने के लिए नियमित निगरानी करें। "
+                "पत्तियों पर पानी जमा न होने दें।"
+            ),
+            "ingredients": "निम तेल 10ml + पानी 1L या Pseudomonas fluorescens घोल",
         },
         "te": {
-            "organic_solution": "ఏంథ్రాక్నోస్ నివారణ కోసం ఉదయం నిమ్ ఆయిల్ స్ప్రే చేయండి.",
-            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L",
-            "organic_solution_alt0": "వారానికి ఒకసారి స్ప్రే చేయండి",
-            "ingredients_alt0": "నిమ్ ఆయిల్ మిశ్రమం",
-            "organic_solution_alt1": "పాడైన ఆకులను తొలగించండి",
-            "ingredients_alt1": "సురక్షితంగా తొలగించండి",
-            "organic_solution_alt2": "సరైన దూరం ఉంచండి",
-            "ingredients_alt2": "సూర్యరశ్మి మరియు గాలి ప్రసరణను ఖాయంచేయండి"
+            "organic_solution": (
+                "చెక్కిన మరియు పార్టైన ఆకులను కత్తిరించి కాల్చండి. "
+                "ప్రతి వారానికి Pseudomonas fluorescens లేదా నిమ్ ద్రావణాన్ని స్ప్రే చేయండి. "
+                "చెట్టు బ్రాంచుల మధ్య గాలి ప్రవాహం కోసం పొలం తెరిచి ఉంచండి. "
+                "కొత్త ఇన్ఫెక్షన్లు కనుగొంటే తొలగించండి. "
+                "ఆకులపై నీరు నిలవనివ్వండి."
+            ),
+            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L లేదా Pseudomonas fluorescens ద్రావణం",
         }
     },
 
     "Bacterial Canker": {
         "en": {
-            "organic_solution": "Prune affected branches and apply copper-based fungicide.",
-            "ingredients": "Copper fungicide 5g + Water 1L",
-            "organic_solution_alt0": "Sanitize tools",
-            "ingredients_alt0": "Use alcohol or bleach",
-            "organic_solution_alt1": "Remove fallen leaves",
-            "ingredients_alt1": "Prevent spread",
-            "organic_solution_alt2": "Maintain airflow",
-            "ingredients_alt2": "Avoid wet conditions"
+            "organic_solution": (
+                "Cut and burn infected branches immediately. "
+                "Spray neem extract weekly to reduce bacterial spread. "
+                "Keep foliage dry, avoid overhead watering. "
+                "Monitor regularly for new infections. "
+                "Maintain proper sanitation of tools before use."
+            ),
+            "ingredients": "Neem extract 50ml + Water 1L",
         },
         "hi": {
-            "organic_solution": "प्रभावित शाखाओं को छाँटें और तांबे आधारित फंगिसाइड लगाएं।",
-            "ingredients": "तांबा फंगिसाइड 5g + पानी 1L",
-            "organic_solution_alt0": "उपकरणों को साफ करें",
-            "ingredients_alt0": "अल्कोहल या ब्लीच का उपयोग करें",
-            "organic_solution_alt1": "गिरे हुए पत्ते हटाएँ",
-            "ingredients_alt1": "फैलाव रोकें",
-            "organic_solution_alt2": "हवा का प्रवाह बनाएँ",
-            "ingredients_alt2": "गीले हालात से बचें"
+            "organic_solution": (
+                "संक्रमित शाखाओं को तुरंत काटें और जला दें। "
+                "रोग फैलाव कम करने के लिए हर सप्ताह निम अर्क छिड़कें। "
+                "पत्तियों को सूखा रखें, ऊपर से पानी न दें। "
+                "नए संक्रमण के लिए नियमित जाँच करें। "
+                "उपकरणों को इस्तेमाल से पहले साफ रखें।"
+            ),
+            "ingredients": "निम अर्क 50ml + पानी 1L",
         },
         "te": {
-            "organic_solution": "ప్రభావిత కొమ్మలను కత్తిరించి కాపర్-ఆధారిత ఫంగిసైడ్ వాడండి.",
-            "ingredients": "కాపర్ ఫంగిసైడ్ 5g + నీరు 1L",
-            "organic_solution_alt0": "పరికరాలను శుభ్రం చేయండి",
-            "ingredients_alt0": "ఆల్కహాల్ లేదా బ్లీచ్ ఉపయోగించండి",
-            "organic_solution_alt1": "పతిత ఆకులను తొలగించండి",
-            "ingredients_alt1": "వ్యతిరేక వ్యాప్తి నివారించండి",
-            "organic_solution_alt2": "గాలి ప్రసరణను కొనసాగించండి",
-            "ingredients_alt2": "తేమ పరిస్థితుల నుండి దూరంగా ఉంచండి"
+            "organic_solution": (
+                "పాడైన కొమ్ములను వెంటనే కత్తిరించి కాల్చండి. "
+                "బాక్టీరియాను తగ్గించడానికి వారానికి ఒకసారి నిమ్ ద్రావణం స్ప్రే చేయండి. "
+                "ఆకులు పొడి ఉంచండి, పై నుండి నీరు ఇవ్వవద్దు. "
+                "కొత్త ఇన్ఫెక్షన్లను గుర్తించడానికి నిరంతరం పరిశీలించండి. "
+                "పరికరాలను ఉపయోగించేముందు శుభ్రం చేయండి."
+            ),
+            "ingredients": "నిమ్ ఎక్స్ట్రాక్ట్ 50ml + నీరు 1L",
         }
     },
 
     "Cutting Weevil": {
         "en": {
-            "organic_solution": "Remove infected leaves and use neem oil.",
-            "ingredients": "Neem oil 10ml + Water 1L",
-            "organic_solution_alt0": "Apply weekly",
-            "ingredients_alt0": "Neem oil mixture",
-            "organic_solution_alt1": "Use sticky traps",
-            "ingredients_alt1": "Control adult weevils",
-            "organic_solution_alt2": "Monitor crop regularly",
-            "ingredients_alt2": "Check leaves and shoots"
+            "organic_solution": (
+                "Remove and destroy infected leaves. "
+                "Spray neem oil weekly to reduce larvae. "
+                "Use sticky traps for adult weevils. "
+                "Apply garlic-chili water on shoots weekly. "
+                "Monitor crop regularly for new damage."
+            ),
+            "ingredients": "Neem oil 10ml + Water 1L, Garlic 5g + Chili 5g + Water 1L",
         },
         "hi": {
-            "organic_solution": "संक्रमित पत्ते हटाएँ और निम तेल लगाएँ।",
-            "ingredients": "निम तेल 10ml + पानी 1L",
-            "organic_solution_alt0": "साप्ताहिक आवेदन करें",
-            "ingredients_alt0": "निम तेल मिश्रण",
-            "organic_solution_alt1": "चिपकने वाले ट्रैप लगाएँ",
-            "ingredients_alt1": "वयस्क कीड़ों को नियंत्रित करें",
-            "organic_solution_alt2": "फसल की नियमित निगरानी करें",
-            "ingredients_alt2": "पत्तियों और शाखाओं की जाँच करें"
+            "organic_solution": (
+                "संक्रमित पत्ते हटाएँ और नष्ट करें। "
+                "कीट कम करने के लिए सप्ताह में एक बार निम तेल छिड़कें। "
+                "वयस्क कीड़ों के लिए चिपकने वाले ट्रैप लगाएँ। "
+                "शाखाओं पर लहसुन-मिर्च पानी छिड़कें। "
+                "फसल में नई क्षति के लिए नियमित निगरानी करें।"
+            ),
+            "ingredients": "निम तेल 10ml + पानी 1L, लहसुन 5g + मिर्च 5g + पानी 1L",
         },
         "te": {
-            "organic_solution": "పాడైన ఆకులను తొలగించండి మరియు నిమ్ ఆయిల్ ఉపయోగించండి.",
-            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L",
-            "organic_solution_alt0": "వారానికి ఒకసారి స్ప్రే చేయండి",
-            "ingredients_alt0": "నిమ్ ఆయిల్ మిశ్రమం",
-            "organic_solution_alt1": "స్టికీ ట్రాప్స్ ఉపయోగించండి",
-            "ingredients_alt1": "పెద్ద వేవీలు నియంత్రించండి",
-            "organic_solution_alt2": "ఫసల్ను নিয়మితంగా పరిశీలించండి",
-            "ingredients_alt2": "ఆకులు మరియు కొమ్మలను తనిఖీ చేయండి"
+            "organic_solution": (
+                "పాడైన ఆకులను తొలగించి నాశనం చేయండి. "
+                "లార్వాలను తగ్గించడానికి వారానికి ఒకసారి నిమ్ ఆయిల్ స్ప్రే చేయండి. "
+                "వయస్క వీవీలు కోసం స్టికీ traps వాడండి. "
+                "కొమ్మలపై వెల్లుల్లి-మిరపచారు నీరు స్ప్రే చేయండి. "
+                "కొత్త నష్టం కోసం పంటను తరచూ పరిశీలించండి."
+            ),
+            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L, వెల్లుల్లి 5g + మిరప 5g + నీరు 1L",
         }
     },
 
     "Die Back": {
         "en": {
-            "organic_solution": "Prune affected branches and spray neem oil.",
-            "ingredients": "Neem oil 10ml + Water 1L",
-            "organic_solution_alt0": "Repeat weekly",
-            "ingredients_alt0": "Neem oil mixture",
-            "organic_solution_alt1": "Improve drainage",
-            "ingredients_alt1": "Avoid waterlogging",
-            "organic_solution_alt2": "Fertilize properly",
-            "ingredients_alt2": "Maintain soil health"
+            "organic_solution": (
+                "Prune affected branches weekly. "
+                "Spray neem oil to prevent spread. "
+                "Remove dead wood from trees. "
+                "Apply organic compost at tree base. "
+                "Ensure proper sunlight and airflow around trees."
+            ),
+            "ingredients": "Neem oil 10ml + Water 1L, Compost 1kg/tree",
         },
         "hi": {
-            "organic_solution": "प्रभावित शाखाओं को छाँटें और निम तेल लगाएँ।",
-            "ingredients": "निम तेल 10ml + पानी 1L",
-            "organic_solution_alt0": "साप्ताहिक दोहराएँ",
-            "ingredients_alt0": "निम तेल मिश्रण",
-            "organic_solution_alt1": "नाली सुधारें",
-            "ingredients_alt1": "पानी जमा न होने दें",
-            "organic_solution_alt2": "सही खाद दें",
-            "ingredients_alt2": "मिट्टी का स्वास्थ्य बनाएँ"
+            "organic_solution": (
+                "संक्रमित शाखाओं को सप्ताह में काटें। "
+                "फैलाव रोकने के लिए निम तेल छिड़कें। "
+                "पेड़ से मृत लकड़ी हटाएँ। "
+                "पेड़ के आधार पर कार्बनिक खाद डालें। "
+                "धूप और हवा का ध्यान रखें।"
+            ),
+            "ingredients": "निम तेल 10ml + पानी 1L, 1kg प्रति पेड़",
         },
         "te": {
-            "organic_solution": "ప్రభావిత కొమ్మలను కత్తిరించి నిమ్ ఆయిల్ స్ప్రే చేయండి.",
-            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L",
-            "organic_solution_alt0": "వారానికి పునరావృతం చేయండి",
-            "ingredients_alt0": "నిమ్ ఆయిల్ మిశ్రమం",
-            "organic_solution_alt1": "డ్రైనేజీని మెరుగుపరచండి",
-            "ingredients_alt1": "నీరు నిలవకుండా చూసుకోండి",
-            "organic_solution_alt2": "సరైన ఎరువు ఇవ్వండి",
-            "ingredients_alt2": "మట్టిని ఆరోగ్యంగా ఉంచండి"
+            "organic_solution": (
+                "ప్రభావిత కొమ్ములను వారానికి కత్తిరించండి. "
+                "వ్యతిరేక వ్యాప్తి కోసం నిమ్ ఆయిల్ స్ప్రే చేయండి. "
+                "మృత చెక్కను చెట్టులోంచి తొలగించండి. "
+                "చెట్టు అడుగున ఆర్గానిక్ కాంపోస్ట్ వేయండి. "
+                "సరైన సూర్యకాంతి మరియు గాలి ప్రవాహం ఉండేలా చూడండి."
+            ),
+            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L, 1kg/tree",
         }
     },
 
     "Gall Midge": {
         "en": {
-            "organic_solution": "Remove affected shoots and spray neem oil.",
-            "ingredients": "Neem oil 10ml + Water 1L",
-            "organic_solution_alt0": "Apply weekly",
-            "ingredients_alt0": "Neem oil mixture",
-            "organic_solution_alt1": "Introduce natural predators",
-            "ingredients_alt1": "Control larvae",
-            "organic_solution_alt2": "Monitor regularly",
-            "ingredients_alt2": "Check for infestation"
+            "organic_solution": (
+                "Remove affected shoots and buds. "
+                "Spray neem oil weekly to control larvae. "
+                "Introduce natural predators like wasps. "
+                "Apply garlic-chili water to young shoots weekly. "
+                "Monitor flowers regularly for infestation."
+            ),
+            "ingredients": "Neem oil 10ml + Water 1L, Garlic 5g + Chili 5g + Water 1L",
         },
         "hi": {
-            "organic_solution": "प्रभावित कलियों को हटाएँ और निम तेल लगाएँ।",
-            "ingredients": "निम तेल 10ml + पानी 1L",
-            "organic_solution_alt0": "साप्ताहिक आवेदन करें",
-            "ingredients_alt0": "निम तेल मिश्रण",
-            "organic_solution_alt1": "प्राकृतिक शिकारी छोड़ें",
-            "ingredients_alt1": "लार्वा को नियंत्रित करें",
-            "organic_solution_alt2": "नियमित जाँच करें",
-            "ingredients_alt2": "संक्रमण देखें"
+            "organic_solution": (
+                "संक्रमित कलियों और शाखाओं को हटाएँ। "
+                "लार्वा नियंत्रण के लिए सप्ताह में एक बार निम तेल छिड़कें। "
+                "प्राकृतिक शिकारी छोड़ें। "
+                "युवा शाखाओं पर लहसुन-मिर्च पानी छिड़कें। "
+                "कलियों की नियमित जाँच करें।"
+            ),
+            "ingredients": "निम तेल 10ml + पानी 1L, लहसुन 5g + मिर्च 5g + पानी 1L",
         },
         "te": {
-            "organic_solution": "ప్రభావిత కొమ్మలను తొలగించి నిమ్ ఆయిల్ స్ప్రే చేయండి.",
-            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L",
-            "organic_solution_alt0": "వారానికి స్ప్రే చేయండి",
-            "ingredients_alt0": "నిమ్ ఆయిల్ మిశ్రమం",
-            "organic_solution_alt1": "సహజ శత్రువులను పరిచయం చేయండి",
-            "ingredients_alt1": "లార్వాను నియంత్రించండి",
-            "organic_solution_alt2": "నియమితంగా పరిశీలించండి",
-            "ingredients_alt2": "ఇన్ఫెస్టేషన్ కోసం తనిఖీ చేయండి"
+            "organic_solution": (
+                "ప్రభావిత కొమ్మలు మరియు పూవులను తొలగించండి. "
+                "లార్వా నియంత్రణ కోసం వారానికి ఒకసారి నిమ్ ఆయిల్ స్ప్రే చేయండి. "
+                "సహజ శత్రువులను పరిచయం చేయండి (వాస్ప్స్). "
+                "యువ కొమ్మలపై వెల్లుల్లి-మిరపచారు నీటిని వారానికి స్ప్రే చేయండి. "
+                "పువ్వులను తరచుగా పరిశీలించండి."
+            ),
+            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L, వెల్లుల్లి 5g + మిరప 5g + నీరు 1L",
         }
     },
 
     "Powdery Mildew": {
         "en": {
-            "organic_solution": "Spray potassium bicarbonate solution on leaves.",
-            "ingredients": "Potassium bicarbonate 10g + Water 1L",
-            "organic_solution_alt0": "Repeat weekly",
-            "ingredients_alt0": "Check regularly",
-            "organic_solution_alt1": "Remove affected leaves",
-            "ingredients_alt1": "Prevent spread",
-            "organic_solution_alt2": "Maintain airflow",
-            "ingredients_alt2": "Avoid dense planting"
+            "organic_solution": (
+                "Prune malformed panicles and infected leaves. "
+                "Spray potassium bicarbonate solution weekly. "
+                "Apply neem oil every 7 days to prevent spread. "
+                "Maintain open spacing and good airflow. "
+                "Avoid wet leaves; water soil only."
+            ),
+            "ingredients": "Potassium bicarbonate 10g + Water 1L, Neem oil 10ml + Water 1L",
         },
         "hi": {
-            "organic_solution": "पत्तियों पर पोटैशियम बाइकार्बोनेट का घोल छिड़कें।",
-            "ingredients": "पोटैशियम बाइकार्बोनेट 10g + पानी 1L",
-            "organic_solution_alt0": "साप्ताहिक दोहराएँ",
-            "ingredients_alt0": "नियमित जाँच करें",
-            "organic_solution_alt1": "संक्रमित पत्तियाँ हटाएँ",
-            "ingredients_alt1": "फैलाव रोकें",
-            "organic_solution_alt2": "हवा बनाएँ",
-            "ingredients_alt2": "घना रोपण न करें"
+            "organic_solution": (
+                "असामान्य फूलों और संक्रमित पत्तों को काटें। "
+                "सप्ताह में एक बार पोटैशियम बाइकार्बोनेट का घोल छिड़कें। "
+                "निम तेल हर 7 दिन छिड़कें। "
+                "खुला रोपण और हवा का ध्यान रखें। "
+                "गीली पत्तियाँ न रखें, केवल मिट्टी को पानी दें।"
+            ),
+            "ingredients": "पोटैशियम बाइकार्बोनेट 10g + पानी 1L, निम तेल 10ml + पानी 1L",
         },
         "te": {
-            "organic_solution": "ఆకులపై పొటాషియం బైకార్బోనేట్ సొల్యూషన్ స్ప్రే చేయండి.",
-            "ingredients": "పొటాషియం బైకార్బోనేట్ 10g + నీరు 1L",
-            "organic_solution_alt0": "వారానికి పునరావృతం చేయండి",
-            "ingredients_alt0": "నియమిత తనిఖీ చేయండి",
-            "organic_solution_alt1": "పాడైన ఆకులను తొలగించండి",
-            "ingredients_alt1": "వ్యతిరేక వ్యాప్తి నివారించండి",
-            "organic_solution_alt2": "గాలి ప్రసరణ ఉంచండి",
-            "ingredients_alt2": "గణనీయమైన రోపణలు నివారించండి"
+            "organic_solution": (
+                "పాడైన పానికల్ మరియు ఆకులను తొలగించండి. "
+                "వారానికి ఒకసారి పొటాషియం బైకార్బోనేట్ ద్రావణం స్ప్రే చేయండి. "
+                "ప్రతి 7 రోజులకోసారి నిమ్ ఆయిల్ స్ప్రే చేయండి. "
+                "చిన్న దూరం, గాలి ప్రవాహం ఉంచండి. "
+                "ఆకులు గీలా కాకుండా చూడండి, మట్టి మాత్రమే నీరు ఇవ్వండి."
+            ),
+            "ingredients": "పొటాషియం బైకార్బోనేట్ 10g + నీరు 1L, నిమ్ ఆయిల్ 10ml + నీరు 1L",
         }
     },
 
     "Sooty Mould": {
         "en": {
-            "organic_solution": "Spray water to remove honeydew and apply neem oil.",
-            "ingredients": "Neem oil 10ml + Water 1L",
-            "organic_solution_alt0": "Repeat weekly",
-            "ingredients_alt0": "Monitor regularly",
-            "organic_solution_alt1": "Prune affected branches",
-            "ingredients_alt1": "Maintain tree hygiene",
-            "organic_solution_alt2": "Encourage natural predators",
-            "ingredients_alt2": "Control pests"
+            "organic_solution": (
+                "Prune and destroy heavily infected branches. "
+                "Spray water to wash honeydew off leaves. "
+                "Apply neem oil weekly to prevent mould. "
+                "Introduce ladybugs to control sap-sucking pests. "
+                "Maintain tree spacing for good airflow."
+            ),
+            "ingredients": "Neem oil 10ml + Water 1L, 10–20 ladybugs per tree",
         },
         "hi": {
-            "organic_solution": "हनीड्यू हटाने के लिए पानी छिड़कें और निम तेल लगाएँ।",
-            "ingredients": "निम तेल 10ml + पानी 1L",
-            "organic_solution_alt0": "साप्ताहिक दोहराएँ",
-            "ingredients_alt0": "नियमित निगरानी",
-            "organic_solution_alt1": "संक्रमित शाखाएँ छाँटें",
-            "ingredients_alt1": "पेड़ की स्वच्छता बनाएँ",
-            "organic_solution_alt2": "प्राकृतिक शिकारी बढ़ावा दें",
-            "ingredients_alt2": "कीट नियंत्रण"
+            "organic_solution": (
+                "भारी संक्रमित शाखाओं को काटें और नष्ट करें। "
+                "पत्तियों से हनीड्यू धोने के लिए पानी छिड़कें। "
+                "सप्ताह में एक बार निम तेल छिड़कें। "
+                "हनीड्यू वाले कीटों को नियंत्रित करने के लिए लेडीबग छोड़ें। "
+                "पेड़ों के बीच हवा के लिए दूरी बनाए रखें।"
+            ),
+            "ingredients": "निम तेल 10ml + पानी 1L, प्रति पेड़ 10–20 लेडीबग",
         },
         "te": {
-            "organic_solution": "హనిడ్యూ తొలగించడానికి నీటితో స్ప్రే చేసి నిమ్ ఆయిల్ వాడండి.",
-            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L",
-            "organic_solution_alt0": "వారానికి పునరావృతం చేయండి",
-            "ingredients_alt0": "నియమిత పరిశీలన",
-            "organic_solution_alt1": "ప్రభావిత కొమ్ములను కత్తిరించండి",
-            "ingredients_alt1": "చెట్టు శుభ్రతను ఉంచండి",
-            "organic_solution_alt2": "సహజ శత్రువులను ప్రోత్సహించండి",
-            "ingredients_alt2": "కీటకాలను నియంత్రించండి"
+            "organic_solution": (
+                "తీవ్రంగా పాడైన కొమ్ములను కత్తిరించి తొలగించండి. "
+                "ఆకులపై హనిడ్యూ తొలగించడానికి నీరు స్ప్రే చేయండి. "
+                "వారానికి ఒకసారి నిమ్ ఆయిల్ స్ప్రే చేయండి. "
+                "హనీ డ్యూ సృష్టించే కీటలను నియంత్రించడానికి లేడీబగ్స్ విడుదల చేయండి. "
+                "చెట్ల మధ్య గాలి ప్రవాహం కోసం దూరం ఉంచండి."
+            ),
+            "ingredients": "నిమ్ ఆయిల్ 10ml + నీరు 1L, ప్రతి చెట్టు 10–20 లేడీబగ్స్",
         }
     },
 
     "Healthy": {
         "en": {
-            "organic_solution": "Your plant is healthy. Maintain good practices.",
-            "ingredients": "Water, sunlight, proper nutrition",
-            "organic_solution_alt0": "Regular monitoring",
-            "ingredients_alt0": "Check leaves",
-            "organic_solution_alt1": "Maintain spacing",
-            "ingredients_alt1": "Ensure airflow",
-            "organic_solution_alt2": "Apply mulch",
-            "ingredients_alt2": "Prevent weeds"
+            "organic_solution": (
+                "Plant is healthy. Continue regular watering and sunlight. "
+                "Maintain soil fertility with compost. "
+                "Monitor leaves weekly for early signs of disease. "
+                "Maintain proper tree spacing and airflow. "
+                "Remove weeds to prevent pest buildup."
+            ),
+            "ingredients": "Water, sunlight, compost",
         },
         "hi": {
-            "organic_solution": "आपका पौधा स्वस्थ है। अच्छी प्रथाएँ बनाए रखें।",
-            "ingredients": "पानी, धूप, उचित पोषण",
-            "organic_solution_alt0": "नियमित निगरानी",
-            "ingredients_alt0": "पत्तियों की जाँच करें",
-            "organic_solution_alt1": "दूरी बनाए रखें",
-            "ingredients_alt1": "हवा सुनिश्चित करें",
-            "organic_solution_alt2": "मल्च लगाएँ",
-            "ingredients_alt2": "घास और खरपतवार रोकें"
+            "organic_solution": (
+                "पौधा स्वस्थ है। नियमित पानी और धूप दें। "
+                "मिट्टी की उर्वरता बनाए रखने के लिए खाद दें। "
+                "रोग के शुरुआती लक्षण के लिए पत्तियों की जाँच करें। "
+                "पेड़ों के बीच दूरी और हवा बनाए रखें। "
+                "कीट रोकने के लिए खरपतवार हटाएँ।"
+            ),
+            "ingredients": "पानी, धूप, खाद",
         },
         "te": {
-            "organic_solution": "మీ మొక్క ఆరోగ్యంగా ఉంది. మంచి సంరక్షణ కొనసాగించండి.",
-            "ingredients": "నీరు, సూర్యకిరణాలు, సరైన పోషణ",
-            "organic_solution_alt0": "నియమితంగా పరిశీలించండి",
-            "ingredients_alt0": "ఆకులను తనిఖీ చేయండి",
-            "organic_solution_alt1": "దూరం ఉంచండి",
-            "ingredients_alt1": "గాలి ప్రవాహం నిర్ధారించండి",
-            "organic_solution_alt2": "మల్చ్ ఉపయోగించండి",
-            "ingredients_alt2": "వేడలను నివారించండి"
+            "organic_solution": (
+                "మొక్క ఆరోగ్యంగా ఉంది. నిబంధనీయంగా నీరు, సూర్యకిరణాలు ఇవ్వండి. "
+                "మట్టిలో పోషకత్వం కోసం కాంపోస్ట్ ఉపయోగించండి. "
+                "ఏవైనా లక్షణాల కోసం ఆకులను వారానికి ఒకసారి తనిఖీ చేయండి. "
+                "చెట్ల మధ్య సరైన దూరం ఉంచి గాలి ప్రవాహం నిర్ధారించండి. "
+                "పురుగులను తగ్గించడానికి పూలను తీయండి."
+            ),
+            "ingredients": "నీరు, సూర్యకిరణాలు, కాంపోస్ట్",
         }
     }
 }
-
 
 def get_solution(disease_name, lang="en"):
     """
