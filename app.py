@@ -73,9 +73,17 @@ def load_model():
     return model
 
 # ---------------- STATE ----------------
-for key in ["page", "lang", "pred_class", "confidence"]:
-    if key not in st.session_state:
-        st.session_state[key] = "language" if key=="page" else ("en" if key=="lang" else None if key=="pred_class" else 0.0)
+if "page" not in st.session_state:
+    st.session_state.page = "language"
+if "lang" not in st.session_state:
+    st.session_state.lang = "en"
+if "pred_class" not in st.session_state:
+    st.session_state.pred_class = None
+if "confidence" not in st.session_state:
+    st.session_state.confidence = 0.0
+if "model" not in st.session_state:
+    with st.spinner("Loading model, please wait..."):
+        st.session_state.model = load_model()
 
 # ---------------- STYLE ----------------
 st.markdown("""
@@ -121,13 +129,16 @@ def upload_page():
     image_source = uploaded_file or capture_image
 
     if image_source:
+        st.session_state.pred_class = None
+        st.session_state.confidence = 0.0
+
         image = Image.open(image_source).convert("RGB")
         st.image(image, use_container_width=True)
         img_array = np.expand_dims(np.array(image.resize(IMG_SIZE)), axis=0)
         img_array = efficientnet.preprocess_input(img_array)
+
         with st.spinner(headers['analyzing']):
-            model = load_model()
-            preds = model.predict(img_array)[0]
+            preds = st.session_state.model.predict(img_array)[0]
             pred_idx = np.argmax(preds)
             st.session_state.pred_class = CLASS_NAMES[pred_idx]
             st.session_state.confidence = preds[pred_idx]*100
@@ -144,6 +155,7 @@ def upload_page():
     else:
         st.info(headers['info_upload'])
         if st.button(headers['back_language']): st.session_state.page = "language"
+
     st.markdown("</div>", unsafe_allow_html=True)
 
 def solution_page():
@@ -156,17 +168,18 @@ def solution_page():
         st.warning("⚠ Upload an image first.")
     else:
         sol = get_solution(st.session_state.pred_class, lang)
-        for i in range(3):
-            solution_text = sol.get(f"organic_solution_alt{i}", sol.get("organic_solution", ""))
-            ingredients_text = sol.get(f"ingredients_alt{i}", sol.get("ingredients", ""))
-            st.markdown(
-                f"<div class='solution-text'>"
-                f"<h3>{headers['solution_header']} {i+1}</h3>"
-                f"<p>{solution_text}</p>"
-                f"<h3>{headers['ingredients_header']}</h3>"
-                f"<p>{ingredients_text}</p>"
-                f"</div>", unsafe_allow_html=True
-            )
+
+        solution_text = sol.get("organic_solution", "No solution available.")
+        ingredients_text = sol.get("ingredients", "No ingredients info.")
+
+        st.markdown(
+            f"<div class='solution-text'>"
+            f"<h3>{headers['solution_header']}</h3>"
+            f"<p>{solution_text}</p>"
+            f"<h3>{headers['ingredients_header']}</h3>"
+            f"<p>{ingredients_text}</p>"
+            f"</div>", unsafe_allow_html=True
+        )
 
     col1, col2 = st.columns(2)
     with col1:
@@ -175,7 +188,9 @@ def solution_page():
     with col2:
         if st.button(headers['try_again'], use_container_width=True):
             st.session_state.page = "upload"
+
     st.markdown("</div>", unsafe_allow_html=True)
+
 
 # ---------------- MAIN ----------------
 if st.session_state.page == "language":
